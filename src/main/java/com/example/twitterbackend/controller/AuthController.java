@@ -50,7 +50,7 @@ public class AuthController {
         User isEmailExist = userRepository.findByEmail(email);
 
         if(isEmailExist!=null){
-           throw new UserException("Email id is already taken, try using some other email.");
+           throw new UserException("Email id is already in use, try using some other email.");
         }
 
         User createdUser= new User();
@@ -66,6 +66,7 @@ public class AuthController {
 
         String token = jwtProvider.generateToken(authentication);
         AuthResponse response= new AuthResponse(token, true);
+
         return new ResponseEntity<AuthResponse>(response, HttpStatus.CREATED);
     }
 
@@ -80,6 +81,7 @@ public class AuthController {
 
         String token = jwtProvider.generateToken(authentication);
         AuthResponse response= new AuthResponse(token, true);
+
         return new ResponseEntity<AuthResponse>(response, HttpStatus.ACCEPTED);
     }
 
