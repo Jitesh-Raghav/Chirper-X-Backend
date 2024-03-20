@@ -3,6 +3,7 @@ package com.example.twitterbackend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,4 +34,6 @@ public class Tweet {
 
     private boolean isReply;
     private boolean isTweet;
+
+    private LocalDateTime CreatedAt;
 }
