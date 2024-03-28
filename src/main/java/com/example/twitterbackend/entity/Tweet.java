@@ -36,4 +36,6 @@ public class Tweet {
     private boolean isTweet;
 
     private LocalDateTime CreatedAt;
+    private String image;
+    private String video;
 }
