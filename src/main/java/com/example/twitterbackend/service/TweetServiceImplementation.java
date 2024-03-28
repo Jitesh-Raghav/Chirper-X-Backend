@@ -75,16 +75,34 @@ public class TweetServiceImplementation implements TweetService{
 
     @Override
     public Tweet createdReply(TweetReplyRequest req, User user) throws TweetException {
-        return null;
+
+        Tweet existingTweet = findById(req.getTweetId());
+        Tweet tweet = new Tweet();
+
+        tweet.setContent(req.getContent());
+        tweet.setCreatedAt(LocalDateTime.now());
+        tweet.setImage(req.getImage());
+        tweet.setUser(user);
+        tweet.setTweet(true);
+        tweet.setReply(false);
+        tweet.setReplyFor(existingTweet);  //i.e we have created this reply for the 'existingTweet'
+
+        Tweet savedReply= tweetRepository.save(tweet);
+        tweet.getReplyTweet().add(savedReply);
+
+        tweetRepository.save(existingTweet);
+
+        return existingTweet;
     }
 
     @Override
     public List<Tweet> getUserTweet(User user) {
-        return null;
+
+        return tweetRepository.findByRetweetUserContainsOrUser_IdAndIsTweetTrueOrderByCreatedAtDesc(user, user.getId());
     }
 
     @Override
     public List<Tweet> findByLikesContainsUser(User user) {
-        return null;
+        return tweetRepository.findByLikesUser_id(user.getId());
     }
 }
