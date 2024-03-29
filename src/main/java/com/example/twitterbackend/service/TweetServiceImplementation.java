@@ -98,7 +98,7 @@ public class TweetServiceImplementation implements TweetService{
     @Override
     public List<Tweet> getUserTweet(User user) {
 
-        return tweetRepository.findByRetweetUserContainsOrUser_IdAndIsTweetTrueOrderByCreatedAtDesc(user, user.getId());
+        return tweetRepository.findByRetweetUsersContainsOrUser_IdAndIsTweetTrueOrderByCreatedAtDesc(user, user.getId());
     }
 
     @Override
