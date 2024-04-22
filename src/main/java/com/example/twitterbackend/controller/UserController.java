@@ -41,15 +41,15 @@ public class UserController {
         return new ResponseEntity<UserDto>(userDto, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<UserDto>> searchUser(@RequestParam String query, @RequestHeader("Authorization") String jwt) throws UserException{
-        User reqUser= userService.findUserProfileByJwt(jwt);
-        List<User> users= userService.searchUser(query);
-
-        List<UserDto> userDtos= UserDtoMapper.toUserDtos(users);
-
-        return new ResponseEntity<>(userDtos, HttpStatus.ACCEPTED);
-    }
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<List<UserDto>> searchUser(@RequestParam String query, @RequestHeader("Authorization") String jwt) throws UserException{
+//        User reqUser= userService.findUserProfileByJwt(jwt);
+//        List<User> users= userService.searchUser(query);
+//
+//        List<UserDto> userDtos= UserDtoMapper.toUserDtos(users);
+//
+//        return new ResponseEntity<>(userDtos, HttpStatus.ACCEPTED);
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<UserDto> updateUser(@RequestBody User req, @RequestHeader("Authorization") String jwt) throws UserException{

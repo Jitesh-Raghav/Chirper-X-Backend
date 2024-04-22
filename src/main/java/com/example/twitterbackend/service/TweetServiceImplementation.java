@@ -88,7 +88,8 @@ public class TweetServiceImplementation implements TweetService{
         tweet.setReplyFor(existingTweet);  //i.e we have created this reply for the 'existingTweet'
 
         Tweet savedReply= tweetRepository.save(tweet);
-        tweet.getReplyTweet().add(savedReply);
+//      tweet.getReplyTweet().add(savedReply);
+        existingTweet.getReplyTweet().add(savedReply);
 
         tweetRepository.save(existingTweet);
 
