@@ -13,6 +13,10 @@ public class TweetDtoMapper {
 
     public static TweetDto toTweetDto(Tweet tweet, User reqUser){
 
+        if (reqUser == null) {
+            return null;
+        }
+
         UserDto user= UserDtoMapper.toUserDto(tweet.getUser());
 
         boolean isLiked= TweetUtil.isLikedByReqUser(reqUser, tweet);
@@ -24,7 +28,8 @@ public class TweetDtoMapper {
         }
 
         TweetDto tweetDto=new TweetDto();
-        tweetDto.setId(tweet.getId());
+        if(tweet.getId()!=null){   tweetDto.setId(tweet.getId());  }
+
         tweetDto.setContent(tweet.getContent());
         tweetDto.setCreatedAt(tweet.getCreatedAt());
         tweetDto.setImage(tweet.getImage());
@@ -43,6 +48,10 @@ public class TweetDtoMapper {
 
     public static List<TweetDto> toTweetDtos(List<Tweet> tweets, User reqUser){
 
+        if (reqUser == null) {
+            return null;
+        }
+
         List<TweetDto> tweetDtos= new ArrayList<>();
 
         for(Tweet tweet: tweets){
@@ -53,6 +62,10 @@ public class TweetDtoMapper {
     }
 
     private static TweetDto toReplyTweetDto(Tweet tweet, User reqUser) {
+
+        if (reqUser == null) {
+            return null;
+        }
         UserDto user= UserDtoMapper.toUserDto(tweet.getUser());
 
         boolean isLiked= TweetUtil.isLikedByReqUser(reqUser, tweet);
@@ -64,7 +77,8 @@ public class TweetDtoMapper {
         }
 
         TweetDto tweetDto=new TweetDto();
-        tweetDto.setId(tweet.getId());
+        if(tweet.getId()!=null){  tweetDto.setId(tweet.getId());  }
+
         tweetDto.setContent(tweet.getContent());
         tweetDto.setCreatedAt(tweet.getCreatedAt());
         tweetDto.setImage(tweet.getImage());
@@ -73,7 +87,7 @@ public class TweetDtoMapper {
         tweetDto.setTotalRetweets(tweet.getRetweetUsers().size());
         tweetDto.setUser(user);
         tweetDto.setLiked(isLiked);
-        tweetDto.setRetweet(tweetDto.isRetweet());
+        tweetDto.setRetweet(tweet.isRetweet());
         tweetDto.setRetweetUserId(retweetUserId);
         tweetDto.setReplyTweets(toTweetDtos(tweet.getReplyTweet(), reqUser));
         tweetDto.setVideo(tweet.getVideo());

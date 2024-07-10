@@ -45,6 +45,7 @@ public class TweetServiceImplementation implements TweetService{
            tweet.getRetweetUsers().remove(user);
        }else{
            tweet.getRetweetUsers().add(user);
+           tweet.setRetweet(true);
        }
         return tweetRepository.save(tweet);
     }
@@ -77,18 +78,18 @@ public class TweetServiceImplementation implements TweetService{
     public Tweet createdReply(TweetReplyRequest req, User user) throws TweetException {
 
         Tweet existingTweet = findById(req.getTweetId());
-        Tweet tweet = new Tweet();
 
+        Tweet tweet = new Tweet();
         tweet.setContent(req.getContent());
         tweet.setCreatedAt(LocalDateTime.now());
         tweet.setImage(req.getImage());
         tweet.setUser(user);
-        tweet.setTweet(true);
-        tweet.setReply(false);
-        tweet.setReplyFor(existingTweet);  //i.e we have created this reply for the 'existingTweet'
+        tweet.setTweet(false);
+        tweet.setReply(true);
+        tweet.setReplyFor(existingTweet);  //i.e. we have created this reply for the 'existingTweet'
 
         Tweet savedReply= tweetRepository.save(tweet);
-//      tweet.getReplyTweet().add(savedReply);
+       // tweet.getReplyTweet().add(savedReply);
         existingTweet.getReplyTweet().add(savedReply);
 
         tweetRepository.save(existingTweet);

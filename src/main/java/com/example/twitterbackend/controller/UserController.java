@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<UserDto> getUserProfile(@RequestHeader("Authorization") String jwt) throws UserException{
         User user= userService.findUserProfileByJwt(jwt);
         UserDto userDto= UserDtoMapper.toUserDto(user);
-        userDto.setReq_uesr(true);
+        userDto.setReq_user(true);
 
         return new ResponseEntity<UserDto>(userDto, HttpStatus.ACCEPTED);
     }
@@ -35,7 +35,7 @@ public class UserController {
         User user= userService.findUserById(userId);
 
         UserDto userDto= UserDtoMapper.toUserDto(user);
-        userDto.setReq_uesr(UserUtil.isReqUser(reqUser, user));
+        userDto.setReq_user(UserUtil.isReqUser(reqUser, user));
         userDto.setFollowed(UserUtil.isFollowedByReqUser(reqUser, user));
 
         return new ResponseEntity<UserDto>(userDto, HttpStatus.ACCEPTED);

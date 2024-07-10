@@ -34,6 +34,7 @@ public class Tweet {
 
     private boolean isReply;
     private boolean isTweet;
+    private boolean isRetweet;
 
     private LocalDateTime createdAt;
     private String image;
