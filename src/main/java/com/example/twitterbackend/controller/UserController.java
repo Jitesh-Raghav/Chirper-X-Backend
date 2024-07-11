@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "https://chirper-x.vercel.app")
 @RequestMapping("/api/users")
 public class UserController {
 

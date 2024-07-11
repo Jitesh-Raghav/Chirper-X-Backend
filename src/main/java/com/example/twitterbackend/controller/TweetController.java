@@ -19,6 +19,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "https://chirper-x.vercel.app")
 @RequestMapping("/api/tweets")
 public class TweetController {
 
