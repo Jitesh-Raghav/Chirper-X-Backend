@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,13 @@ public class Tweet {
     private boolean isTweet;
     private boolean isRetweet;
 
-    private LocalDateTime createdAt;
+//  private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneOffset.UTC);   //cuz railway server is in US, so showing utc timezone
     private String image;
     private String video;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now(ZoneOffset.UTC);
+    }
 }
